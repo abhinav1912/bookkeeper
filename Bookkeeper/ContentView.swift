@@ -10,11 +10,11 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(items.sorted().reversed(), id: \.id) { item in
                     NavigationLink {
                         Text("Item at \(item.getDate())")
                     } label: {
-                        Text(item.getDate(), format: Date.FormatStyle(date: .numeric, time: .standard))
+                        TransactionView(transaction: item)
                     }
                 }
                 .onDelete(perform: deleteItems)

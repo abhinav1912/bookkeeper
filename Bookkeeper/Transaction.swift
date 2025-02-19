@@ -47,6 +47,13 @@ extension Transaction {
     }
 }
 
+// - MARK: Comparable conformance
+extension Transaction: Comparable {
+    static func < (lhs: Transaction, rhs: Transaction) -> Bool {
+        return lhs.timestamp < rhs.timestamp
+    }
+}
+
 // - MARK: Utility methods
 extension Transaction {
     static func getRandomTransaction() -> Transaction {
