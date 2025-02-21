@@ -5,12 +5,12 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Transaction]
+    @Query(sort: \Transaction.timestamp, order: .reverse) var items: [Transaction]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items.sorted().reversed(), id: \.id) { item in
+                ForEach(items, id: \.id) { item in
                     NavigationLink {
                         Text("Item at \(item.getDate())")
                     } label: {
@@ -19,6 +19,8 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
+            .animation(.default, value: items)
+            .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
