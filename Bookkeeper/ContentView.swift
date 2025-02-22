@@ -7,10 +7,12 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Transaction.timestamp, order: .reverse) var items: [Transaction]
 
+    @State var searchText = ""
+
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items, id: \.id) { item in
+                ForEach(filteredItems, id: \.id) { item in
                     NavigationLink {
                         Text("Item at \(item.getDate())")
                     } label: {
@@ -21,6 +23,7 @@ struct ContentView: View {
             }
             .animation(.default, value: items)
             .listStyle(.plain)
+            .searchable(text: $searchText)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
@@ -34,6 +37,13 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+    }
+
+    var filteredItems: [Transaction] {
+        if searchText.isEmpty {
+            return items
+        }
+        return items.filter { $0.source.contains(searchText) }
     }
 
     private func addItem() {
