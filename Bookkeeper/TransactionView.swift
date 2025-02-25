@@ -20,22 +20,18 @@ struct TransactionView: View {
                     Text(transactionId)
                         .font(.footnote)
                 }
-                Text(transaction.source)
+                Text(transaction.transactionSource)
                     .lineLimit(1)
             }
             Spacer()
             Text(transactionAmountString)
-                .foregroundStyle(isCreditTransaction ? .green : .red)
+                .foregroundStyle(transaction.isCredit ? .green : .red)
         }
         .padding(.smallMargin)
     }
 
     var transactionAmountString: String {
         let formattedString = numberFormatter.string(from: NSNumber(value: transaction.amount)) ?? "\(transaction.amount)"
-        return "\(isCreditTransaction ? "+" : "-") \(formattedString)"
-    }
-
-    var isCreditTransaction: Bool {
-        transaction.type == .credit
+        return "\(transaction.isCredit ? "+" : "-") \(formattedString)"
     }
 }

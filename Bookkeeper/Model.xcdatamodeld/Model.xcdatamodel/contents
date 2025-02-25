@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24B91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isCredit" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="source" attributeType="String"/>
+        <attribute name="transactionDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="transactionId" optional="YES" attributeType="String"/>
+    </entity>
+</model>
